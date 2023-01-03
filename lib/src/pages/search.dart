@@ -1,3 +1,6 @@
+/// App 하단 Navigation Bar의 Search Icon 터치 시
+/// 첫 번째로 나타나는 다른 사용자들이 업로드한 이미지 리스트 출력 페이지
+
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,9 +17,13 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  /// 이미지의 Grid는 (N, 3) 행렬로 구성
   List<List<int>> groupBox = [[], [], []];
+
+  /// 2개의 행을 차지하는 이미지를 구분짓기 위한 Index List
   List<int> groupIndex = [0, 0, 0];
 
+  /// Search 페이지 진입 시 이미지를 각각의 행렬로 초기화하는 함수
   @override
   void initState() {
     super.initState();
@@ -34,13 +41,20 @@ class _SearchState extends State<Search> {
     }
   }
 
+  /// Search 페이지의 App Header Widget
   Widget _appbar() {
     return Row(
       children: [
+        /// Search 페이지의 검색 필드
+        ///
+        /// 터치 시 Search Focus 페이지로 이동
         Expanded(
           child: GestureDetector(
             onTap: () {
+              // // case 1. Getx를 통한 페이지 이동
               // Get.to(SearchForcus());
+
+              // case 2. 중첩 라우터 사용을 통한 페이지 이동
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -48,6 +62,8 @@ class _SearchState extends State<Search> {
                 ),
               );
             },
+
+            /// 검색 필드 내 구성 요소들의 집합
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
               margin: const EdgeInsets.only(left: 15),
@@ -70,6 +86,8 @@ class _SearchState extends State<Search> {
             ),
           ),
         ),
+
+        /// 현재 위치 Icon
         const Padding(
           padding: EdgeInsets.all(15.0),
           child: Icon(Icons.location_pin),
@@ -78,6 +96,7 @@ class _SearchState extends State<Search> {
     );
   }
 
+  /// initState를 통해 얻은 행렬로 이미지를 출력
   Widget _body() {
     return SingleChildScrollView(
       child: Row(

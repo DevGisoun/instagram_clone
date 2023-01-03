@@ -1,3 +1,5 @@
+/// Post의 Grid System 구축 및 UI 구성 컴포넌트
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +9,15 @@ import 'package:instagram_clone/src/components/img_data.dart';
 class PostWidget extends StatelessWidget {
   const PostWidget({Key? key}) : super(key: key);
 
+  /// Post의 Header
+  /// Avatar, Nickname, onTab()으로 구성
   Widget _header() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          /// Post 작성자의 Avatar, Nickname
           AvatarWidget(
             thumbPath:
                 'https://phantom-marca.unidadeditorial.es/6697dbd875d4e47f339c0db2a27803a1/resize/1320/f/jpg/assets/multimedia/imagenes/2022/03/08/16467404046841.jpg',
@@ -20,6 +25,8 @@ class PostWidget extends StatelessWidget {
             nickname: 'DevGisoun',
             size: 40,
           ),
+
+          /// Post 관련 이벤트(공유, 작성자 팔로우 등) 기능 집합
           GestureDetector(
             onTap: () {},
             child: Padding(
@@ -35,6 +42,7 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  /// Post의 Image Widget
   Widget _image() {
     return CachedNetworkImage(
       imageUrl:
@@ -42,6 +50,8 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  /// Post의 버튼 집합
+  /// 좋아요, 댓글, 디엠, 북마크 기능 구성
   Widget _infoCount() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -50,6 +60,7 @@ class PostWidget extends StatelessWidget {
         children: [
           Row(
             children: [
+              /// Post 좋아요 버튼
               ImageData(
                 IconsPath.likeOffIcon,
                 width: 65,
@@ -57,6 +68,8 @@ class PostWidget extends StatelessWidget {
               const SizedBox(
                 width: 15,
               ),
+
+              /// Post 댓글 조회 버튼
               ImageData(
                 IconsPath.replyIcon,
                 width: 60,
@@ -64,12 +77,16 @@ class PostWidget extends StatelessWidget {
               const SizedBox(
                 width: 15,
               ),
+
+              /// Post 작성자 디엠 버튼
               ImageData(
                 IconsPath.directMessage,
                 width: 55,
               ),
             ],
           ),
+
+          /// Post 북마크 버튼
           ImageData(
             IconsPath.bookMarkOffIcon,
             width: 50,
@@ -79,6 +96,8 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  /// Post의 정보 집합
+  /// 좋아요 개수, 작성자 Nickname, 작성 내용 및 Expand 기능으로 구성
   Widget _infoDescription() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -112,6 +131,7 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  /// Post 댓글 개수 및 조회
   Widget _replyTextBtn() {
     return GestureDetector(
       onTap: () {},
@@ -128,6 +148,7 @@ class PostWidget extends StatelessWidget {
     );
   }
 
+  /// Post 작성 일자
   Widget _dateAgo() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.0),

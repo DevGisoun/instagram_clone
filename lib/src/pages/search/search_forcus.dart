@@ -1,3 +1,6 @@
+/// Search 페이지에서 검색 필드 터치 시 넘어오는
+/// 텍스트 필드가 존재하는 검색 페이지
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
@@ -14,6 +17,7 @@ class _SearchForcusState extends State<SearchForcus>
     with TickerProviderStateMixin {
   late TabController tabController;
 
+  /// Tab의 개수 정의 및 초기화
   @override
   void initState() {
     super.initState();
@@ -23,12 +27,13 @@ class _SearchForcusState extends State<SearchForcus>
     );
   }
 
+  /// 각 Tab의 UI
   Widget _tabMenuOne(String menu) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.0),
+      padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Text(
         menu,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 15,
           color: Colors.black,
         ),
@@ -36,6 +41,7 @@ class _SearchForcusState extends State<SearchForcus>
     );
   }
 
+  /// 검색 Tab Menu UI 제작, 기능 구현 및 구성 요소
   PreferredSizeWidget _tabMenu() {
     return PreferredSize(
       child: Container(
@@ -64,6 +70,7 @@ class _SearchForcusState extends State<SearchForcus>
     );
   }
 
+  /// Tab의 내용 출력
   Widget _body() {
     return TabBarView(
       controller: tabController,
@@ -92,6 +99,10 @@ class _SearchForcusState extends State<SearchForcus>
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+
+        /// 검색 Text Field 좌측 Back 버튼 구현
+        ///
+        /// BottomNavController의 willPopAction 함수 호출
         leading: GestureDetector(
           onTap: BottomNavController.to.willPopAction,
           child: Padding(
@@ -102,11 +113,13 @@ class _SearchForcusState extends State<SearchForcus>
           ),
         ),
         titleSpacing: 0,
+
+        /// 검색 Text Field UI 구성
         title: Container(
           margin: const EdgeInsets.only(right: 15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color: Color(0xffefefef),
+            color: const Color(0xffefefef),
           ),
           child: const TextField(
             decoration: InputDecoration(

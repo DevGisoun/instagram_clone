@@ -1,3 +1,5 @@
+/// App 실행 시 가장 먼저 실행되는 파일
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/src/app.dart';
@@ -8,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

@@ -1,3 +1,6 @@
+/// App의 메인화면 페이지
+/// 사용자 Story, Story List, Post List로 구성
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/src/components/avatar_widget.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
@@ -6,15 +9,21 @@ import 'package:instagram_clone/src/components/post_widget.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
+  /// Home의 상단에 나타나는 Story List 중 가장 첫 번째 Story
+  ///
+  /// (사용자의 Story 또는 Story 추가)
   Widget _myStory() {
     return Stack(
       children: [
+        /// 사용자의 Avatar Widget
         AvatarWidget(
           thumbPath:
               'https://phantom-marca.unidadeditorial.es/6697dbd875d4e47f339c0db2a27803a1/resize/1320/f/jpg/assets/multimedia/imagenes/2022/03/08/16467404046841.jpg',
           type: AvatarType.TYPE2,
           size: 70,
         ),
+
+        /// Story 추가를 나타내는 Container UI
         Positioned(
           right: 5,
           bottom: 0,
@@ -45,8 +54,10 @@ class Home extends StatelessWidget {
     );
   }
 
+  /// 사용자를 제외한 다른 사용자의 Story List
   Widget _storyBoardList() {
     return SingleChildScrollView(
+      /// 가로 스크롤 적용
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
@@ -57,6 +68,8 @@ class Home extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
+
+          /// 존재하는 Story List 출력
           ...List.generate(
             100,
             (index) => AvatarWidget(
@@ -70,6 +83,7 @@ class Home extends StatelessWidget {
     );
   }
 
+  /// 존재하는 Post List 출력
   Widget _postList() {
     return Column(
       children: List.generate(

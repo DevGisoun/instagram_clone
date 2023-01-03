@@ -1,6 +1,11 @@
+/// 본 프로젝트에서 사용되는 Avatar Widget 구성
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+/// TYPE1 : Story에 나타나는 다른 사용자의 Avatar
+/// TYPE2 : Story에 나타나는 사용자의 Avatar
+/// TYPE3 : Post에 나타나는 사용자 또는 다른 사용자의 Avatar
 enum AvatarType {
   TYPE1,
   TYPE2,
@@ -23,6 +28,7 @@ class AvatarWidget extends StatelessWidget {
     this.size = 65,
   }) : super(key: key);
 
+  /// Avatar Widget TYPE1
   Widget type_1_Widget() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -42,6 +48,7 @@ class AvatarWidget extends StatelessWidget {
     );
   }
 
+  /// Avatar Widget TYPE2
   Widget type_2_Widget() {
     return Container(
       padding: const EdgeInsets.all(2),
@@ -63,6 +70,7 @@ class AvatarWidget extends StatelessWidget {
     );
   }
 
+  /// Avatar Widget TYPE3
   Widget type_3_Widget() {
     return Row(
       children: [

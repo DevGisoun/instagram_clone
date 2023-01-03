@@ -1,3 +1,5 @@
+/// App 종료 시도 시 나타나는 팝업 컴포넌트
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

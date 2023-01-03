@@ -1,3 +1,5 @@
+/// 본 프로젝트에서 사용되는 Assets들의 집합
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
