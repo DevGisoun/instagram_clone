@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
 import 'package:instagram_clone/src/controller/bottom_nav_controller.dart';
+import 'package:instagram_clone/src/pages/home.dart';
 
 class App extends GetView<BottomNavController> {
   const App({Key? key}) : super(key: key);
@@ -12,13 +13,10 @@ class App extends GetView<BottomNavController> {
       onWillPop: controller.willPopAction,
       child: Obx(
         () => Scaffold(
-          appBar: AppBar(),
           body: IndexedStack(
             index: controller.pageIndex.value,
             children: [
-              Container(
-                child: Center(child: Text('HOME')),
-              ),
+              const Home(),
               Container(
                 child: Center(child: Text('SEARCH')),
               ),
