@@ -4,7 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 /// TYPE1 : Story에 나타나는 다른 사용자의 Avatar
+///
 /// TYPE2 : Story에 나타나는 사용자의 Avatar
+///
 /// TYPE3 : Post에 나타나는 사용자 또는 다른 사용자의 Avatar
 enum AvatarType {
   TYPE1,
@@ -13,12 +15,22 @@ enum AvatarType {
 }
 
 class AvatarWidget extends StatelessWidget {
+  /// 사용자별 Story 유무
   bool? hasStory;
+
+  /// 사용자별 프로필사진
   String thumbPath;
+
+  /// 사용자별 닉네임
   String? nickname;
+
+  /// 용도별 사용되는 Avatar Type
   AvatarType type;
+
+  /// Avatar Size
   double? size;
 
+  /// TYPE별 Avatar 인스턴스화
   AvatarWidget({
     Key? key,
     this.hasStory,

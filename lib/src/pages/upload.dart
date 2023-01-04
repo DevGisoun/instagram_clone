@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -355,8 +356,10 @@ class _UploadState extends State<Upload> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+
+        /// Close Icon
         leading: GestureDetector(
-          onTap: () {},
+          onTap: Get.back,
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: ImageData(
@@ -364,6 +367,8 @@ class _UploadState extends State<Upload> {
             ),
           ),
         ),
+
+        /// App Bar Title
         title: const Text(
           'New Post',
           style: TextStyle(
@@ -372,6 +377,8 @@ class _UploadState extends State<Upload> {
             color: Colors.black,
           ),
         ),
+
+        /// 다음 페이지 이동 Icon
         actions: [
           GestureDetector(
             onTap: () {},
