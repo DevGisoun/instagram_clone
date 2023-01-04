@@ -1,3 +1,5 @@
+/// Activity 터치 시 나타나는 화면 구성
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/src/components/avatar_widget.dart';
 

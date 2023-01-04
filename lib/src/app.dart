@@ -6,6 +6,7 @@ import 'package:instagram_clone/src/components/img_data.dart';
 import 'package:instagram_clone/src/controller/bottom_nav_controller.dart';
 import 'package:instagram_clone/src/pages/active_history.dart';
 import 'package:instagram_clone/src/pages/home.dart';
+import 'package:instagram_clone/src/pages/mypage.dart';
 
 import 'pages/search.dart';
 
@@ -45,9 +46,7 @@ class App extends GetView<BottomNavController> {
               const ActiveHistory(),
 
               /// My Page 터치 시 나타나는 화면 구성
-              Container(
-                child: Center(child: Text('MYPAGE')),
-              ),
+              const MyPage(),
             ],
           ),
 
