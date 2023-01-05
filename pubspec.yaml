@@ -41,6 +41,9 @@ dependencies:
   expandable_text: ^2.3.0
   quiver: ^3.2.1
   photo_manager: ^2.5.2
+  firebase_core: ^2.4.1
+  firebase_auth: ^4.2.4
+  google_sign_in: ^5.4.2
 
 dev_dependencies:
   flutter_test:
