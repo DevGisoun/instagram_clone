@@ -1,26 +1,15 @@
 /// My Page 터치 시 나타나는 화면 구성
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/avatar_widget.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
 import 'package:instagram_clone/src/components/user_card.dart';
+import 'package:instagram_clone/src/controller/auth_controller.dart';
+import 'package:instagram_clone/src/controller/mypage_controller.dart';
 
-class MyPage extends StatefulWidget {
+class MyPage extends GetView<MyPageController> {
   const MyPage({Key? key}) : super(key: key);
-
-  @override
-  State<MyPage> createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    tabController = TabController(length: 2, vsync: this);
-  }
 
   /// 사용자 Infomation 템플릿
   Widget _statisticsOne(String title, int value) {
@@ -51,50 +40,51 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   Widget _information() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          /// 사용자 Avatar, Post, Followers, Following
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AvatarWidget(
-                thumbPath:
-                    'https://w.namu.la/s/3049fe7bc95b17fa7a23ed680e4a93defb20c588c3141e7e5bbf0a2aa9a964b620543dcf965745602bd84cebe6a879ae35ea56500a6d598d71305cd29d1f10bf10022dd1d9128d564976eed880e0354f997cdc9967bf8481dea3d93e4ab013d9',
-                type: AvatarType.TYPE3,
-                size: 80,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-
-              /// 사용자 Infomation을 그룹으로 묶어
-              /// 균등한 간격으로 Expanded 조정
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(child: _statisticsOne('Post', 15)),
-                    Expanded(child: _statisticsOne('Followers', 11)),
-                    Expanded(child: _statisticsOne('Following', 3)),
-                  ],
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            /// 사용자 Avatar, Post, Followers, Following
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AvatarWidget(
+                  thumbPath: controller.targetUser.value.thumbnail!,
+                  type: AvatarType.TYPE3,
+                  size: 80,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
+                const SizedBox(
+                  width: 10,
+                ),
 
-          /// 자기소개
-          const Text(
-            '안녕! DevGisoun 이라고 해~ 잘부탁해잘부탁해잘부탁해잘부탁해',
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.black,
+                /// 사용자 Infomation을 그룹으로 묶어
+                /// 균등한 간격으로 Expanded 조정
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: _statisticsOne('Post', 15)),
+                      Expanded(child: _statisticsOne('Followers', 11)),
+                      Expanded(child: _statisticsOne('Following', 3)),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+
+            /// 자기소개
+            Text(
+              controller.targetUser.value.description!,
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -212,7 +202,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   // My Page 내 Tab Menu
   Widget _tabMenu() {
     return TabBar(
-      controller: tabController,
+      controller: controller.tabController,
       indicatorColor: Colors.black,
       indicatorWeight: 1,
       tabs: [
@@ -282,12 +272,14 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
       /// 사용자 닉네임, 업로드 및 메뉴 Icon 존재
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
-          'DevGisoun',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.black,
+        title: Obx(
+          () => Text(
+            controller.targetUser.value.nickname!,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
           ),
         ),
         actions: [

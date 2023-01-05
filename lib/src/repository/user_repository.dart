@@ -15,14 +15,14 @@ class UserRepository {
     if (data.size == 0) {
       return null;
     } else {
-      return IUser.fronJson(data.docs.first.data());
+      return IUser.fromJson(data.docs.first.data());
     }
   }
 
   /// 회원가입 시 사용자 객체 DB에 추가
   static Future<bool> signup(IUser user) async {
     try {
-      await FirebaseFirestore.instance.collection('user').add(user.toMap());
+      await FirebaseFirestore.instance.collection('users').add(user.toMap());
       return true;
     } catch (e) {
       return false;

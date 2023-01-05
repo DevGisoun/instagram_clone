@@ -1,6 +1,9 @@
 /// 회원가입 페이지 UI 구축 및 기능 구현
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/src/controller/auth_controller.dart';
 import 'package:instagram_clone/src/model/instagram_user.dart';
 
@@ -24,6 +27,12 @@ class _SignupPageState extends State<SignupPage> {
   /// TextField에 입력되는 description Value 업데이트
   TextEditingController descriptionController = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+  XFile? thumbnailXFile;
+
+  /// 디바이스 갤러리에서 이미지 선택 시 화면 갱신
+  void update() => setState(() {});
+
   /// 회원가입 시 Avatar(프로필 이미지) 등록
   Widget _avatar() {
     return Column(
@@ -33,17 +42,34 @@ class _SignupPageState extends State<SignupPage> {
           child: SizedBox(
             width: 100,
             height: 100,
-            child: Image.asset(
-              'assets/img/default_image.png',
-              fit: BoxFit.cover,
-            ),
+
+            /// 디바이스 갤러이에서 이미지를 선택하였다면 해당 이미지 사용,
+            /// 그렇지 않다면 Default 이미지 사용
+            child: thumbnailXFile != null
+                ? Image.file(
+                    File(thumbnailXFile!.path),
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/img/default_image.png',
+                    fit: BoxFit.cover,
+                  ),
           ),
         ),
         const SizedBox(
           height: 15,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            /// 디바이스 갤러리에서 이미지 선택
+            ///
+            /// imageQuality는 Default : 100(%)
+            thumbnailXFile = await _picker.pickImage(
+              source: ImageSource.gallery,
+              imageQuality: 10,
+            );
+            update();
+          },
           child: const Text('이미지 변경'),
         ),
       ],
@@ -124,15 +150,19 @@ class _SignupPageState extends State<SignupPage> {
         child: ElevatedButton(
           onPressed: () {
             /// '회원가입' 버튼 터치 시 uid, 사용자의 닉네임, 설명을
-            /// 기반으로한 IUser 인스턴스 생성
+            /// 메타 정보로한 IUser 인스턴스 생성
             var signupUser = IUser(
               uid: widget.uid,
               nickname: nicknameController.text,
               description: descriptionController.text,
             );
 
-            /// 반환받은 IUser 인스턴스를 전달하여 회원가입 실행
-            AuthController.to.signup(signupUser);
+            /// 반환받은 IUser 인스턴스와 디바이스 갤러리에서 등록한 이미지를
+            /// 전달하여 회원가입 실행
+            AuthController.to.signup(
+              signupUser,
+              thumbnailXFile,
+            );
           },
           child: const Text('회원가입'),
         ),
