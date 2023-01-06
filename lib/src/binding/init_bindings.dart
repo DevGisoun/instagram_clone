@@ -5,6 +5,7 @@ import 'package:instagram_clone/src/controller/bottom_nav_controller.dart';
 
 import '../controller/auth_controller.dart';
 import '../controller/mypage_controller.dart';
+import '../controller/upload_controller.dart';
 
 class InitBinding extends Bindings {
   @override
