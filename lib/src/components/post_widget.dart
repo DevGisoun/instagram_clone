@@ -5,9 +5,16 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/src/components/avatar_widget.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
+import 'package:instagram_clone/src/model/post.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({Key? key}) : super(key: key);
+  final Post post;
+
+  const PostWidget({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
 
   /// Post의 Header
   /// Avatar, Nickname, onTab()으로 구성
@@ -19,10 +26,9 @@ class PostWidget extends StatelessWidget {
         children: [
           /// Post 작성자의 Avatar, Nickname
           AvatarWidget(
-            thumbPath:
-                'https://phantom-marca.unidadeditorial.es/6697dbd875d4e47f339c0db2a27803a1/resize/1320/f/jpg/assets/multimedia/imagenes/2022/03/08/16467404046841.jpg',
+            thumbPath: post.userInfo!.thumbnail!,
             type: AvatarType.TYPE3,
-            nickname: 'DevGisoun',
+            nickname: post.userInfo!.nickname,
             size: 40,
           ),
 
@@ -45,8 +51,7 @@ class PostWidget extends StatelessWidget {
   /// Post의 Image Widget
   Widget _image() {
     return CachedNetworkImage(
-      imageUrl:
-          'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt0168407a10a76ec9/62ea2c90d7f6b63b71d20721/Talent_Factories_Man_City.jpg',
+      imageUrl: post.thumbnail!,
     );
   }
 
@@ -104,15 +109,15 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '좋아요 150개',
-            style: TextStyle(
+          Text(
+            '좋아요 ${post.likeCount ?? 0}개',
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
           ExpandableText(
-            '콘텐츠 1 입니다.\n콘텐츠 1 입니다.\n콘텐츠 1 입니다.\n콘텐츠 1 입니다.',
-            prefixText: 'DevGisoun',
+            post.description ?? '',
+            prefixText: post.userInfo!.nickname,
             onPrefixTap: () {
               print('페이지 이동');
             },
@@ -150,11 +155,11 @@ class PostWidget extends StatelessWidget {
 
   /// Post 작성 일자
   Widget _dateAgo() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Text(
-        '1일전',
-        style: TextStyle(
+        timeago.format(post.createdAt!),
+        style: const TextStyle(
           color: Colors.grey,
           fontSize: 11,
         ),

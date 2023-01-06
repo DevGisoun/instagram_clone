@@ -2,11 +2,13 @@
 /// 사용자 Story, Story List, Post List로 구성
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/avatar_widget.dart';
 import 'package:instagram_clone/src/components/img_data.dart';
 import 'package:instagram_clone/src/components/post_widget.dart';
+import 'package:instagram_clone/src/controller/home_controller.dart';
 
-class Home extends StatelessWidget {
+class Home extends GetView<HomeController> {
   const Home({Key? key}) : super(key: key);
 
   /// Home의 상단에 나타나는 Story List 중 가장 첫 번째 Story
@@ -85,11 +87,15 @@ class Home extends StatelessWidget {
 
   /// 존재하는 Post List 출력
   Widget _postList() {
-    return Column(
-      children: List.generate(
-        50,
-        (index) => PostWidget(),
-      ).toList(),
+    return Obx(
+      () => Column(
+        children: List.generate(
+          controller.postList.length,
+          (index) => PostWidget(
+            post: controller.postList[index],
+          ),
+        ).toList(),
+      ),
     );
   }
 

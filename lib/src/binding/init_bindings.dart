@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:instagram_clone/src/controller/bottom_nav_controller.dart';
 
 import '../controller/auth_controller.dart';
+import '../controller/home_controller.dart';
 import '../controller/mypage_controller.dart';
 import '../controller/upload_controller.dart';
 
@@ -16,5 +17,7 @@ class InitBinding extends Bindings {
 
   static additionalBinding() {
     Get.put(MyPageController(), permanent: true);
+    Get.put(HomeController(), permanent: true);
+    Get.put(UploadController(), permanent: true);
   }
 }

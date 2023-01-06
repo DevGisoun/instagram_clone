@@ -32,12 +32,13 @@ class BottomNavController extends GetxController {
 
     switch (page) {
       case PageName.UPLOAD:
-        Get.to(
-          () => Upload(),
-          binding: BindingsBuilder(() {
-            Get.put(UploadController());
-          }),
-        );
+        // Get.to(
+        //   () => Upload(),
+        //   binding: BindingsBuilder(() {
+        //     Get.put(UploadController());
+        //   }),
+        // );
+        Get.to(() => Upload());
         break;
       case PageName.HOME:
       case PageName.SEARCH:

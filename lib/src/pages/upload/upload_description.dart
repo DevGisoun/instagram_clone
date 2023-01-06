@@ -22,13 +22,15 @@ class UploadDescription extends GetView<UploadController> {
               fit: BoxFit.cover,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: TextField(
+              controller: controller.textEditingController,
+
               /// 여러 줄 입력 가능
               maxLines: null,
 
               /// TextField Bottom Line 제거
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -155,7 +157,7 @@ class UploadDescription extends GetView<UploadController> {
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: controller.uploadPost,
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: ImageData(
