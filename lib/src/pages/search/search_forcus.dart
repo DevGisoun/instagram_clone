@@ -44,10 +44,11 @@ class _SearchForcusState extends State<SearchForcus>
   /// 검색 Tab Menu UI 제작, 기능 구현 및 구성 요소
   PreferredSizeWidget _tabMenu() {
     return PreferredSize(
+      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
       child: Container(
         height: AppBar().preferredSize.height,
         width: Size.infinite.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(
               color: Color(0xffe4e4e4),
@@ -66,7 +67,6 @@ class _SearchForcusState extends State<SearchForcus>
           ],
         ),
       ),
-      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
     );
   }
 
